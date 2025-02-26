@@ -1,0 +1,125 @@
+activity_main.xml
+
+<EditText
+       android:id="@+id/et1"
+       android:layout_width="wrap_content"
+       android:layout_height="wrap_content"
+       android:hint="Enter Your Feedback"
+       app:layout_constraintBottom_toBottomOf="parent"
+       app:layout_constraintEnd_toEndOf="parent"
+       app:layout_constraintHorizontal_bias="0.474"
+       app:layout_constraintStart_toStartOf="parent"
+       app:layout_constraintTop_toTopOf="parent"
+       app:layout_constraintVertical_bias="0.438"
+       tools:ignore="MissingConstraints" />
+
+
+   <Button
+       android:id="@+id/b1"
+       android:layout_width="wrap_content"
+       android:layout_height="wrap_content"
+       android:text="SEND"
+       app:layout_constraintBottom_toBottomOf="parent"
+       app:layout_constraintEnd_toEndOf="parent"
+       app:layout_constraintHorizontal_bias="0.448"
+       app:layout_constraintStart_toStartOf="parent"
+       app:layout_constraintTop_toTopOf="parent"
+       app:layout_constraintVertical_bias="0.679"
+       tools:ignore="MissingConstraints" />
+
+
+   <TextView
+       android:id="@+id/textView2"
+       android:layout_width="wrap_content"
+       android:layout_height="wrap_content"
+       android:text="FEEDBACK"
+       android:textSize="30dp"
+       android:textStyle="bold"
+       app:layout_constraintBottom_toBottomOf="parent"
+       app:layout_constraintEnd_toEndOf="parent"
+       app:layout_constraintHorizontal_bias="0.428"
+       app:layout_constraintStart_toStartOf="parent"
+       app:layout_constraintTop_toTopOf="parent"
+       app:layout_constraintVertical_bias="0.212" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+MainActivity.java
+
+public class MainActivity extends AppCompatActivity {
+   Button b1;
+   EditText et1;
+
+
+   @Override
+   protected void onCreate(Bundle savedInstanceState) {
+       super.onCreate(savedInstanceState);
+       setContentView(R.layout.activity_main);
+       b1 = (Button) findViewById(R.id.b1);
+       et1 = (EditText) findViewById(R.id.et1);
+       b1.setOnClickListener(new View.OnClickListener() {
+           @Override
+           public void onClick(View v) {
+               Intent i1=new Intent(MainActivity.this, SecondActivity.class);
+               i1.putExtra("MESSAGE",et1.getText().toString());
+               startActivity(i1);
+           }
+       });
+   }
+}
+
+
+activity_second.xml
+
+ <TextView
+       android:id="@+id/tv2"
+       android:layout_width="wrap_content"
+       android:layout_height="wrap_content"
+       android:text="TextView"
+       app:layout_constraintBottom_toB ottomOf="parent"
+       app:layout_constraintEnd_toEndOf="parent"
+       app:layout_constraintStart_toStartOf="parent"
+       app:layout_constraintTop_toTopOf="parent" />
+
+
+   <TextView
+       android:id="@+id/textView"
+       android:layout_width="wrap_content"
+       android:layout_height="wrap_content"
+       android:text="MESSAGES"
+       android:textStyle="bold"
+       android:textSize="30dp"
+       app:layout_constraintBottom_toBottomOf="parent"
+       app:layout_constraintEnd_toEndOf="parent"
+       app:layout_constraintStart_toStartOf="parent"
+       app:layout_constraintTop_toTopOf="parent"
+       app:layout_constraintVertical_bias="0.251" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+
+
+SecondActivity.java
+
+
+public class SecondActivity extends AppCompatActivity {
+
+
+   TextView tv1;
+
+
+   @SuppressLint("MissingInflatedId")
+   @Override
+   protected void onCreate(Bundle savedInstanceState) {
+       super.onCreate(savedInstanceState);
+       setContentView(R.layout.activity_second);
+       tv1 = (TextView) findViewById(R.id.tv2);
+       Intent i2 = getIntent();
+       tv1.setText("RECEIVED FEEDBACK ="+i2.getStringExtra("MESSAGE"));
+   }
+}
+
+
