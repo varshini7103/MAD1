@@ -1,0 +1,209 @@
+slide_in_right.xml
+
+<translate xmlns:android="http://schemas.android.com/apk/res/android"
+   android:duration="300"
+   android:fromXDelta="100%"
+   android:toXDelta="0%"
+   android:interpolator="@android:interpolator/accelerate_decelerate" />
+
+slide_out_left.xml
+
+<translate xmlns:android="http://schemas.android.com/apk/res/android"
+   android:duration="300"
+   android:fromXDelta="0%"
+   android:toXDelta="-100%"
+   android:interpolator="@android:interpolator/accelerate_decelerate" />
+
+
+activity_main.xml
+
+  <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+       android:layout_width="match_parent"
+       android:layout_height="match_parent">
+
+
+       <TextView
+           android:id="@+id/titleText"
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
+           android:layout_centerHorizontal="true"
+           android:layout_marginTop="50dp"
+           android:text="Select College"
+           android:textColor="#F6F3F3"
+           android:textSize="24sp" />
+
+
+       <!-- Add RadioGroup to group RadioButtons together -->
+       <RadioGroup
+           android:id="@+id/radioGroup"
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
+           android:orientation="vertical"
+           android:layout_below="@id/titleText"
+           android:layout_centerHorizontal="true"
+           android:layout_marginTop="30dp">
+
+
+           <RadioButton
+               android:id="@+id/radioCollege1"
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+               android:text="PSGR KRISHNAMMAL COLLEGE FOR WOMEN"
+               android:textStyle="bold"
+               android:checked="false" />
+
+
+           <RadioButton
+               android:id="@+id/radioCollege2"
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+               android:text="PSG ARTS AND SCIENCE"
+               android:textStyle="bold"
+               android:checked="false" />
+
+
+           <RadioButton
+               android:id="@+id/radioCollege3"
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+               android:text="KRISHNA COLLEGE OF ARTS AND SCIENCE"
+               android:textStyle="bold"
+               android:checked="false" />
+
+
+       </RadioGroup>
+
+
+       <Button
+           android:id="@+id/nextButton"
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
+           android:text="Next"
+           android:layout_centerHorizontal="true"
+           android:layout_below="@id/radioGroup"
+           android:layout_marginTop="20dp" />
+
+
+   </RelativeLayout>
+
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+
+
+activity_college_description.xml
+
+ <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+       android:layout_width="match_parent"
+       android:layout_height="match_parent">
+       <TextView
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
+           android:textAlignment="center"
+           android:text="ABOUT COLLEGE"
+           android:textStyle="bold"
+           android:textSize="30dp"/>
+
+
+       <TextView
+           android:id="@+id/descriptionText"
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
+           android:text="College Description"
+           android:textSize="18sp"
+           android:textColor="#F4F0F0"
+           android:layout_centerInParent="true"
+           android:layout_marginTop="20dp"
+           android:layout_marginLeft="20dp"
+           android:layout_marginRight="20dp"
+           android:padding="10dp"
+           android:textAlignment="center" />
+
+
+   </RelativeLayout>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+
+MainActivity.java
+
+public class MainActivity extends AppCompatActivity {
+
+
+   @Override
+   protected void onCreate(Bundle savedInstanceState) {
+       super.onCreate(savedInstanceState);
+       setContentView(R.layout.activity_main);
+       Button nextButton = findViewById(R.id.nextButton);
+       RadioGroup radioGroup = findViewById(R.id.radioGroup);
+
+
+       nextButton.setOnClickListener(new View.OnClickListener() {
+           @Override
+           public void onClick(View v) {
+               int selectedId = radioGroup.getCheckedRadioButtonId(); // Get selected RadioButton id
+               RadioButton selectedRadioButton = findViewById(selectedId);
+
+
+               // Check which RadioButton is selected and pass the selection to the next activity
+               String selectedCollege = selectedRadioButton != null ? selectedRadioButton.getText().toString() : "No college selected";
+
+
+               // Create an Intent to pass data to CollegeDescriptionActivity
+               Intent intent = new Intent(MainActivity.this, activity_college_description.class);
+               intent.putExtra("selectedCollege", selectedCollege);
+               startActivity(intent);
+               overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left); // Animation transition
+           }
+       });
+   }
+}
+
+
+
+
+
+
+activity_college_description.xml
+
+public class activity_college_description extends AppCompatActivity {
+
+
+   @Override
+   protected void onCreate(Bundle savedInstanceState) {
+       super.onCreate(savedInstanceState);
+       setContentView(R.layout.activity_college_description);
+       // Retrieve the selected college passed from SelectCollegeActivity
+       String selectedCollege = getIntent().getStringExtra("selectedCollege");
+
+
+       // Set up a TextView to display the description
+       TextView descriptionText = findViewById(R.id.descriptionText);
+
+
+       // Define descriptions for each college
+       String description = "";
+
+
+       switch (selectedCollege) {
+           case "PSGR KRISHNAMMAL COLLEGE FOR WOMEN":
+               description = " This College  is known for its excellent faculty and research facilities. It offers a variety of undergraduate and postgraduate programs.";
+               break;
+           case "PSG ARTS AND SCIENCE":
+               description = " This College  has a strong focus on innovation and entrepreneurship. It provides state-of-the-art laboratories and has industry collaborations.";
+               break;
+           case "KRISHNA COLLEGE OF ARTS AND SCIENCE":
+               description = "This College  is a prestigious institution with a legacy of producing top-tier professionals. It has a great campus and a supportive learning environment.";
+               break;
+           default:
+               description = "No college selected.";
+               break;
+       }
+
+
+       // Display the description in the TextView
+       descriptionText.setText(description);
+   }
+}
+
