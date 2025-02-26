@@ -1,0 +1,253 @@
+
+
+   <ScrollView
+       android:layout_width="match_parent"
+       android:layout_height="match_parent">
+
+
+       <LinearLayout
+           android:layout_width="match_parent"
+           android:layout_height="wrap_content"
+           android:orientation="vertical"
+           android:padding="16dp">
+
+
+           <TextView
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+               android:textAlignment="center"
+               android:gravity="center"
+               android:text="FLOWERS"
+               android:textSize="30dp"
+               android:textStyle="bold" />
+
+
+           <ImageView
+               android:id="@+id/imageViewFlower"
+               android:layout_width="match_parent"
+               android:layout_height="200dp"
+               android:layout_marginBottom="16dp"
+               android:scaleType="centerCrop"
+               android:contentDescription="Selected Flower Image" />
+
+
+           <!-- ScrollView Content: Flower Images -->
+           <LinearLayout
+               android:layout_width="match_parent"
+               android:layout_height="wrap_content"
+               android:orientation="vertical">
+
+
+               <!-- Flower 1 -->
+               <LinearLayout
+                   android:orientation="vertical"
+                   android:layout_width="match_parent"
+                   android:layout_height="wrap_content"
+                   android:layout_marginBottom="16dp">
+
+
+                   <ImageView
+                       android:id="@+id/imageFlower1"
+                       android:layout_width="match_parent"
+                       android:layout_height="150dp"
+                       android:src="@drawable/rose1"
+                       android:contentDescription="Flower 1" />
+
+
+                   <TextView
+                       android:id="@+id/textViewFlower1"
+                       android:layout_width="match_parent"
+                       android:layout_height="wrap_content"
+                       android:text="Rose: Known for its beauty, it symbolizes love and passion."
+                       android:padding="8dp"
+                       android:textColor="@android:color/white" />
+               </LinearLayout>
+
+
+               <!-- Flower 2 -->
+               <LinearLayout
+                   android:orientation="vertical"
+                   android:layout_width="match_parent"
+                   android:layout_height="wrap_content"
+                   android:layout_marginBottom="16dp">
+
+
+                   <ImageView
+                       android:id="@+id/imageFlower2"
+                       android:layout_width="match_parent"
+                       android:layout_height="150dp"
+                       android:src="@drawable/rose2"
+                       android:contentDescription="Flower 2" />
+
+
+                   <TextView
+                       android:id="@+id/textViewFlower2"
+                       android:layout_width="match_parent"
+                       android:layout_height="wrap_content"
+                       android:text="Lily: A symbol of purity, lilies are elegant and fragrant."
+                       android:padding="8dp"
+                       android:textColor="@android:color/white" />
+               </LinearLayout>
+
+
+               <!-- Flower 3 -->
+               <LinearLayout
+                   android:orientation="vertical"
+                   android:layout_width="match_parent"
+                   android:layout_height="wrap_content"
+                   android:layout_marginBottom="16dp">
+
+
+                   <ImageView
+                       android:id="@+id/imageFlower3"
+                       android:layout_width="match_parent"
+                       android:layout_height="150dp"
+                       android:src="@drawable/rose3"
+                       android:contentDescription="Flower 3" />
+
+
+                   <TextView
+                       android:id="@+id/textViewFlower3"
+                       android:layout_width="match_parent"
+                       android:layout_height="wrap_content"
+                       android:text="Sunflower: Bright and cheerful, it represents happiness and positivity."
+                       android:padding="8dp"
+                       android:textColor="@android:color/white" />
+               </LinearLayout>
+
+
+               <!-- Flower 4 -->
+               <LinearLayout
+                   android:orientation="vertical"
+                   android:layout_width="match_parent"
+                   android:layout_height="wrap_content"
+                   android:layout_marginBottom="16dp">
+
+
+                   <ImageView
+                       android:id="@+id/imageFlower4"
+                       android:layout_width="match_parent"
+                       android:layout_height="150dp"
+                       android:src="@drawable/rose4"
+                       android:contentDescription="Flower 4" />
+
+
+                   <TextView
+                       android:id="@+id/textViewFlower4"
+                       android:layout_width="match_parent"
+                       android:layout_height="wrap_content"
+                       android:text="Daisy: Simple and beautiful, daisies symbolize innocence and new beginnings."
+                       android:padding="8dp"
+                       android:textColor="@android:color/white" />
+               </LinearLayout>
+
+
+               <!-- Flower 5 -->
+               <LinearLayout
+                   android:orientation="vertical"
+                   android:layout_width="match_parent"
+                   android:layout_height="wrap_content"
+                   android:layout_marginBottom="16dp">
+
+
+                   <ImageView
+                       android:id="@+id/imageFlower5"
+                       android:layout_width="match_parent"
+                       android:layout_height="150dp"
+                       android:src="@drawable/rose5"
+                       android:contentDescription="Flower 5" />
+
+
+                   <TextView
+                       android:id="@+id/textViewFlower5"
+                       android:layout_width="match_parent"
+                       android:layout_height="wrap_content"
+                       android:text="Orchid: Exotic and rare, orchids represent strength and beauty."
+                       android:padding="8dp"
+                       android:textColor="@android:color/white" />
+               </LinearLayout>
+
+
+           </LinearLayout>
+       </LinearLayout>
+   </ScrollView>
+</androidx.constraintlayout.widget.ConstraintLayout>
+MainActivity.java
+
+
+public class MainActivity extends AppCompatActivity {
+   private ImageView imageViewFlower;
+   private TextView textViewFlowerInfo;
+
+
+
+
+   @Override
+   protected void onCreate(Bundle savedInstanceState) {
+       super.onCreate(savedInstanceState);
+       setContentView(R.layout.activity_main);
+       imageViewFlower = findViewById(R.id.imageViewFlower);
+
+
+       // Flower Image Views
+       ImageView imageFlower1 = findViewById(R.id.imageFlower1);
+       ImageView imageFlower2 = findViewById(R.id.imageFlower2);
+       ImageView imageFlower3 = findViewById(R.id.imageFlower3);
+       ImageView imageFlower4 = findViewById(R.id.imageFlower4);
+       ImageView imageFlower5 = findViewById(R.id.imageFlower5);
+
+
+       // Flower Text Views
+       TextView textViewFlower1 = findViewById(R.id.textViewFlower1);
+       TextView textViewFlower2 = findViewById(R.id.textViewFlower2);
+       TextView textViewFlower3 = findViewById(R.id.textViewFlower3);
+       TextView textViewFlower4 = findViewById(R.id.textViewFlower4);
+       TextView textViewFlower5 = findViewById(R.id.textViewFlower5);
+
+
+       // Set OnClickListener for each flower image
+       imageFlower1.setOnClickListener(new View.OnClickListener() {
+           @Override
+           public void onClick(View v) {
+               imageViewFlower.setImageResource(R.drawable.rose1); // Flower 1
+               textViewFlower1.setText("Rose: Known for its beauty, it symbolizes love and passion.");
+           }
+       });
+
+
+       imageFlower2.setOnClickListener(new View.OnClickListener() {
+           @Override
+           public void onClick(View v) {
+               imageViewFlower.setImageResource(R.drawable.rose2); // Flower 2
+               textViewFlower2.setText("Lily: A symbol of purity, lilies are elegant and fragrant.");
+           }
+       });
+
+
+       imageFlower3.setOnClickListener(new View.OnClickListener() {
+           @Override
+           public void onClick(View v) {
+               imageViewFlower.setImageResource(R.drawable.rose3); // Flower 3
+               textViewFlower3.setText("Sunflower: Bright and cheerful, it represents happiness and positivity.");
+           }
+       });
+
+
+       imageFlower4.setOnClickListener(new View.OnClickListener() {
+           @Override
+           public void onClick(View v) {
+               imageViewFlower.setImageResource(R.drawable.rose4); // Flower 4
+               textViewFlower4.setText("Daisy: Simple and beautiful, daisies symbolize innocence and new beginnings.");
+           }
+       });
+
+
+       imageFlower5.setOnClickListener(new View.OnClickListener() {
+           @Override
+           public void onClick(View v) {
+               imageViewFlower.setImageResource(R.drawable.rose5); // Flower 5
+               textViewFlower5.setText("Orchid: Exotic and rare, orchids represent strength and beauty.");
+           }
+       });
+   }
+}
