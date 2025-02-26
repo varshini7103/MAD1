@@ -1,0 +1,208 @@
+
+  <RadioGroup
+       android:id="@+id/rg"
+       android:layout_width="wrap_content"
+       android:layout_height="wrap_content"
+       tools:ignore="MissingConstraints"
+       tools:layout_editor_absoluteX="16dp"
+       tools:layout_editor_absoluteY="74dp">
+
+
+       <TextView
+           android:id="@+id/textView2"
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
+           android:text="Choose Your Department"
+           android:textSize="25dp"
+           android:textStyle="bold"
+           app:layout_constraintBottom_toBottomOf="parent"
+           app:layout_constraintEnd_toEndOf="parent"
+           app:layout_constraintHorizontal_bias="0.054"
+           app:layout_constraintStart_toStartOf="parent"
+           app:layout_constraintTop_toTopOf="parent"
+           app:layout_constraintVertical_bias="0.294" />
+
+
+       <RadioButton
+           android:id="@+id/rb3"
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
+           android:text="IT"
+           app:layout_constraintBottom_toBottomOf="parent"
+           app:layout_constraintEnd_toEndOf="parent"
+           app:layout_constraintHorizontal_bias="0.044"
+           app:layout_constraintStart_toStartOf="parent"
+           app:layout_constraintTop_toTopOf="parent"
+           app:layout_constraintVertical_bias="0.383" />
+
+
+       <RadioButton
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
+           android:text="ECE"
+           app:layout_constraintBottom_toBottomOf="parent"
+           app:layout_constraintEnd_toEndOf="parent"
+           app:layout_constraintHorizontal_bias="0.045"
+           app:layout_constraintStart_toStartOf="parent"
+           app:layout_constraintTop_toTopOf="parent"
+           app:layout_constraintVertical_bias="0.474" />
+
+
+       <RadioButton
+           android:layout_width="48dp"
+           android:layout_height="wrap_content"
+           android:text="CSE"
+           app:layout_constraintBottom_toBottomOf="parent"
+           app:layout_constraintEnd_toEndOf="parent"
+           app:layout_constraintHorizontal_bias="0.045"
+           app:layout_constraintStart_toStartOf="parent"
+           app:layout_constraintTop_toTopOf="parent"
+           app:layout_constraintVertical_bias="0.544" />
+
+
+   </RadioGroup>
+
+
+
+
+   <Button
+       android:id="@+id/submit"
+       android:layout_width="wrap_content"
+       android:layout_height="wrap_content"
+       android:text="SUBMIT"
+       app:layout_constraintBottom_toBottomOf="parent"
+       app:layout_constraintEnd_toEndOf="parent"
+       app:layout_constraintHorizontal_bias="0.527"
+       app:layout_constraintStart_toStartOf="parent"
+       app:layout_constraintTop_toTopOf="parent"
+       app:layout_constraintVertical_bias="0.926" />
+
+
+   <TextView
+       android:id="@+id/textView3"
+       android:layout_width="wrap_content"
+       android:layout_height="wrap_content"
+       android:text="Add on Courses"
+       android:textSize="25dp"
+       android:textStyle="bold"
+       app:layout_constraintBottom_toBottomOf="parent"
+       app:layout_constraintEnd_toEndOf="parent"
+       app:layout_constraintHorizontal_bias="0.0"
+       app:layout_constraintStart_toStartOf="parent"
+       app:layout_constraintTop_toTopOf="parent"
+       app:layout_constraintVertical_bias="0.513" />
+
+
+   <CheckBox
+       android:id="@+id/ch1"
+       android:layout_width="wrap_content"
+       android:layout_height="wrap_content"
+       android:text="Data Mining"
+       app:layout_constraintBottom_toBottomOf="@+id/submit"
+       app:layout_constraintEnd_toEndOf="parent"
+       app:layout_constraintHorizontal_bias="0.053"
+       app:layout_constraintStart_toStartOf="parent"
+       app:layout_constraintTop_toTopOf="parent"
+       app:layout_constraintVertical_bias="0.728" />
+
+
+   <CheckBox
+       android:id="@+id/ch3"
+       android:layout_width="124dp"
+       android:layout_height="65dp"
+       android:text="AWS"
+       app:layout_constraintBottom_toBottomOf="parent"
+       app:layout_constraintEnd_toEndOf="parent"
+       app:layout_constraintHorizontal_bias="0.055"
+       app:layout_constraintStart_toStartOf="parent"
+       app:layout_constraintTop_toTopOf="parent"
+       app:layout_constraintVertical_bias="0.852" />
+
+
+   <CheckBox
+       android:id="@+id/ch2"
+       android:layout_width="wrap_content"
+       android:layout_height="wrap_content"
+       android:text="DATA STRUCTURES"
+       app:layout_constraintBottom_toBottomOf="parent"
+       app:layout_constraintEnd_toEndOf="parent"
+       app:layout_constraintHorizontal_bias="0.063"
+       app:layout_constraintStart_toStartOf="parent"
+       app:layout_constraintTop_toTopOf="parent"
+       app:layout_constraintVertical_bias="0.761"
+       tools:ignore="MissingConstraints" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+
+MainActivity.java
+
+
+public class MainActivity extends AppCompatActivity {
+   CheckBox ch1, ch2, ch3;
+   RadioGroup rg;
+
+
+   Button submit;
+
+
+
+
+   @SuppressLint("MissingInflatedId")
+   @Override
+   protected void onCreate(Bundle savedInstanceState) {
+       super.onCreate(savedInstanceState);
+
+
+       setContentView(R.layout.activity_main);
+       ch1 = findViewById(R.id.ch1);
+       ch2 = findViewById(R.id.ch2);
+       ch3 = findViewById(R.id.ch3);
+       rg = findViewById(R.id.rg);
+       submit = findViewById(R.id.submit);
+       submit.setOnClickListener(new View.OnClickListener() {
+           @Override
+           public void onClick(View v) {
+               StringBuilder selection = new StringBuilder("SELECT ADD ON COURSES:");
+               if (ch1.isChecked())
+                   selection.append("DATA MINING");
+               if (ch2.isChecked())
+                   selection.append("DATA STRUCTURES");
+               if (ch3.isChecked())
+                   selection.append("AWS");
+               int selectedTimeId=rg.getCheckedRadioButtonId();
+               if(selectedTimeId!=-1) {
+                   RadioButton selectedradioButton = findViewById(selectedTimeId);
+                   selection.append("\n SELECT DEPARTMENT:").append(selectedradioButton.getText());
+               }
+               Toast.makeText(MainActivity.this,selection.toString(), Toast.LENGTH_SHORT).show();
+               int totalamount=0;
+               StringBuilder result=new StringBuilder();
+               result.append("Selected Items:");
+               if(ch1.isChecked()){
+                   result.append("Data Mining 3000Rs");
+                   totalamount+=3000;
+               }
+               if(ch2.isChecked()){
+                   result.append("Data Structures 3500Rs");
+                   totalamount+=3500;
+               }
+               if(ch3.isChecked()){
+                   result.append("AWS 4000Rs");
+                   totalamount+=4000;
+               }
+
+
+               Toast.makeText(getApplicationContext(), result.toString(), Toast.LENGTH_LONG).show();
+               Toast.makeText(getApplicationContext(), "Total: "+totalamount+"Rs", Toast.LENGTH_LONG).show();
+           }
+       });
+   }
+
+
+}
+
+
