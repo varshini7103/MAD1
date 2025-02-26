@@ -1,0 +1,192 @@
+<ScrollView
+       android:layout_width="match_parent"
+       android:layout_height="match_parent">
+
+
+
+
+
+
+   <LinearLayout
+       android:layout_width="match_parent"
+       android:layout_height="wrap_content"
+       android:orientation="vertical"
+       android:padding="16dp"
+       tools:ignore="MissingConstraints">
+
+
+
+
+   <LinearLayout
+       android:layout_width="match_parent"
+       android:layout_height="wrap_content"
+       android:orientation="horizontal"
+       android:padding="8dp"
+       android:background="#EFEFEF"
+       tools:ignore="MissingConstraints">
+
+
+       <Button
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
+           android:text="Button 1" />
+
+
+       <Button
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
+           android:text="Button 2"
+           android:layout_marginStart="8dp" />
+   </LinearLayout>
+
+
+    <RelativeLayout
+   android:layout_width="match_parent"
+   android:layout_height="wrap_content"
+   android:padding="8dp"
+   android:background="#DFDFDF"
+   android:layout_marginTop="16dp"
+        tools:ignore="MissingConstraints">
+
+
+   <TextView
+       android:id="@+id/relative_text"
+       android:layout_width="wrap_content"
+       android:layout_height="wrap_content"
+       android:text="RelativeLayout"
+       android:textSize="18sp" />
+
+
+   <Button
+       android:id="@+id/relative_button"
+       android:layout_width="wrap_content"
+       android:layout_height="wrap_content"
+       android:layout_below="@id/relative_text"
+       android:layout_marginTop="8dp"
+       android:text="Click Me" />
+</RelativeLayout>
+   <!-- Con<straintLayout -->
+   <androidx.constraintlayout.widget.ConstraintLayout
+       android:layout_width="match_parent"
+       android:layout_height="wrap_content"
+       android:padding="8dp"
+       android:background="#CFCFCF"
+       android:layout_marginTop="16dp"
+       tools:ignore="MissingConstraints"/>
+
+
+       <TextView
+           android:id="@+id/constraint_text"
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
+           android:text="ConstraintLayout"
+           android:textSize="18sp"
+           app:layout_constraintTop_toTopOf="parent"
+           app:layout_constraintStart_toStartOf="parent"
+           app:layout_constraintEnd_toEndOf="parent" />
+
+
+       <Button
+           android:id="@+id/constraint_button"
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
+           android:text="Center Button"
+           app:layout_constraintTop_toBottomOf="@id/constraint_text"
+           app:layout_constraintStart_toStartOf="parent"
+           app:layout_constraintEnd_toEndOf="parent" />
+       <FrameLayout
+           android:layout_width="match_parent"
+           android:layout_height="200dp"
+           android:layout_marginTop="16dp"
+           android:background="#BFBFBF">
+
+
+           <ImageView
+               android:layout_width="match_parent"
+               android:layout_height="match_parent"
+               android:src="@drawable/img_1"
+               android:scaleType="centerCrop" />
+
+
+           <TextView
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+               android:layout_gravity="center"
+               android:background="#AA000000"
+               android:text="FrameLayout Example"
+               android:textColor="#FFFFFF"
+               android:textSize="20sp" />
+       </FrameLayout>
+       <GridLayout
+           android:layout_width="match_parent"
+           android:layout_height="wrap_content"
+           android:columnCount="3"
+           android:rowCount="2"
+           android:padding="8dp"
+           android:layout_marginTop="16dp"
+           android:background="#AFAFAF">
+
+
+           <Button
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+               android:text="1" />
+
+
+           <Button
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+               android:text="2" />
+
+
+           <Button
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+               android:text="3" />
+
+
+           <Button
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+               android:text="4" />
+
+
+           <Button
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+               android:text="5" />
+
+
+           <Button
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+               android:text="6" />
+       </GridLayout>
+   </LinearLayout>
+   </ScrollView>
+   </androidx.constraintlayout.widget.ConstraintLayout>
+
+MainActivity.java
+
+public class MainActivity extends AppCompatActivity {
+
+
+   @Override
+   protected void onCreate(Bundle savedInstanceState) {
+       super.onCreate(savedInstanceState);
+       EdgeToEdge.enable(this);
+       setContentView(R.layout.activity_main);
+       // RelativeLayout Button Click Event
+       Button relativeButton = findViewById(R.id.relative_button);
+       relativeButton.setOnClickListener(view ->
+               Toast.makeText(this, "RelativeLayout Button Clicked", Toast.LENGTH_SHORT).show()
+       );
+
+
+       // ConstraintLayout Button Click Event
+       Button constraintButton = findViewById(R.id.constraint_button);
+       constraintButton.setOnClickListener(view ->
+                       Toast.makeText(this, "ConstraintLayout Button Clicked", Toast.LENGTH_SHORT).show());
+   }
+}
+
