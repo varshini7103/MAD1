@@ -1,0 +1,189 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+   android:layout_width="match_parent"
+   android:layout_height="match_parent"
+   android:orientation="vertical"
+   android:padding="16dp"
+   android:gravity="center">
+
+
+   <TextView
+       android:id="@+id/textViewResult"
+       android:layout_width="match_parent"
+       android:layout_height="wrap_content"
+       android:textSize="32sp"
+       android:gravity="end"
+       android:background="#E0E0E0"
+       android:padding="16dp"
+       android:text="0"/>
+
+
+   <GridLayout
+       android:layout_width="match_parent"
+       android:layout_height="wrap_content"
+       android:columnCount="4"
+       android:rowCount="5"
+       android:padding="8dp"
+       android:layout_marginTop="16dp">
+
+
+       <!-- Number Buttons -->
+       <Button android:id="@+id/btn7" android:text="7" android:layout_width="wrap_content" android:layout_height="wrap_content"/>
+       <Button android:id="@+id/btn8" android:text="8" android:layout_width="wrap_content" android:layout_height="wrap_content"/>
+       <Button android:id="@+id/btn9" android:text="9" android:layout_width="wrap_content" android:layout_height="wrap_content"/>
+       <Button android:id="@+id/btnDivide" android:text="/" android:layout_width="wrap_content" android:layout_height="wrap_content"/>
+
+
+       <Button android:id="@+id/btn4" android:text="4" android:layout_width="wrap_content" android:layout_height="wrap_content"/>
+       <Button android:id="@+id/btn5" android:text="5" android:layout_width="wrap_content" android:layout_height="wrap_content"/>
+       <Button android:id="@+id/btn6" android:text="6" android:layout_width="wrap_content" android:layout_height="wrap_content"/>
+       <Button android:id="@+id/btnMultiply" android:text="*" android:layout_width="wrap_content" android:layout_height="wrap_content"/>
+
+
+       <Button android:id="@+id/btn1" android:text="1" android:layout_width="wrap_content" android:layout_height="wrap_content"/>
+       <Button android:id="@+id/btn2" android:text="2" android:layout_width="wrap_content" android:layout_height="wrap_content"/>
+       <Button android:id="@+id/btn3" android:text="3" android:layout_width="wrap_content" android:layout_height="wrap_content"/>
+       <Button android:id="@+id/btnSubtract" android:text="-" android:layout_width="wrap_content" android:layout_height="wrap_content"/>
+
+
+       <Button android:id="@+id/btn0" android:text="0" android:layout_width="wrap_content" android:layout_height="wrap_content"/>
+       <Button android:id="@+id/btnClear" android:text="C" android:layout_width="wrap_content" android:layout_height="wrap_content"/>
+       <Button android:id="@+id/btnEquals" android:text="=" android:layout_width="wrap_content" android:layout_height="wrap_content"/>
+       <Button android:id="@+id/btnAdd" android:text="+" android:layout_width="wrap_content" android:layout_height="wrap_content"/>
+
+
+   </GridLayout>
+
+
+</LinearLayout>
+
+
+
+
+
+
+
+
+
+
+
+package com.example.myapplication4;
+
+
+import android.annotation.SuppressLint;
+import android.app.ProgressDialog;
+import android.os.Bundle;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.ProgressBar;
+import android.widget.Spinner;
+import android.widget.TextView;
+
+
+import androidx.activity.EdgeToEdge;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.graphics.Insets;
+import androidx.core.view.ViewCompat;
+import androidx.core.view.WindowInsetsCompat;
+
+
+public class MainActivity extends AppCompatActivity {
+   private TextView textViewResult;
+   private String currentInput = "";
+   private double firstOperand = 0;
+   private String operator = "";
+
+
+   @SuppressLint("MissingInflatedId")
+   @Override
+   protected void onCreate(Bundle savedInstanceState) {
+       super.onCreate(savedInstanceState);
+       setContentView(R.layout.activity_main);
+
+
+       textViewResult = findViewById(R.id.textViewResult);
+
+
+       // Number buttons
+       int[] numberButtonIds = {R.id.btn0, R.id.btn1, R.id.btn2, R.id.btn3, R.id.btn4, R.id.btn5, R.id.btn6, R.id.btn7, R.id.btn8, R.id.btn9};
+       for (int id : numberButtonIds) {
+           findViewById(id).setOnClickListener(this::onNumberClicked);
+       }
+
+
+       // Operator buttons
+       findViewById(R.id.btnAdd).setOnClickListener(v -> onOperatorClicked("+"));
+       findViewById(R.id.btnSubtract).setOnClickListener(v -> onOperatorClicked("-"));
+       findViewById(R.id.btnMultiply).setOnClickListener(v -> onOperatorClicked("*"));
+       findViewById(R.id.btnDivide).setOnClickListener(v -> onOperatorClicked("/"));
+
+
+       // Equals and Clear buttons
+       findViewById(R.id.btnEquals).setOnClickListener(v -> calculateResult());
+       findViewById(R.id.btnClear).setOnClickListener(v -> clearInput());
+   }
+
+
+   private void onNumberClicked(View view) {
+       Button button = (Button) view;
+       currentInput += button.getText().toString();
+       textViewResult.setText(currentInput);
+   }
+
+
+   private void onOperatorClicked(String op) {
+       if (!currentInput.isEmpty()) {
+           firstOperand = Double.parseDouble(currentInput);
+           operator = op;
+           currentInput = "";
+       }
+   }
+
+
+   private void calculateResult() {
+       if (!currentInput.isEmpty() && !operator.isEmpty()) {
+           double secondOperand = Double.parseDouble(currentInput);
+           double result = 0;
+
+
+           switch (operator) {
+               case "+":
+                   result = firstOperand + secondOperand;
+                   break;
+               case "-":
+                   result = firstOperand - secondOperand;
+                   break;
+               case "*":
+                   result = firstOperand * secondOperand;
+                   break;
+               case "/":
+                   if (secondOperand != 0) {
+                       result = firstOperand / secondOperand;
+                   } else {
+                       textViewResult.setText("Error");
+                       return;
+                   }
+                   break;
+           }
+           textViewResult.setText(String.valueOf(result));
+           currentInput = "";
+           operator = "";
+       }
+   }
+
+
+   private void clearInput() {
+       currentInput = "";
+       operator = "";
+       firstOperand = 0;
+       textViewResult.setText("");
+}
+}
+
+
+
+
+
+
+
